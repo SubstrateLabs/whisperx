@@ -55,7 +55,11 @@ DEFAULT_ALIGN_MODELS_HF = {
     "ko": "kresnik/wav2vec2-large-xlsr-korean",
     "ur": "kingabzpro/wav2vec2-large-xls-r-300m-Urdu",
     "te": "anuragshas/wav2vec2-large-xlsr-53-telugu",
-    "hi": "theainerd/Wav2Vec2-large-xlsr-hindi"
+    "hi": "theainerd/Wav2Vec2-large-xlsr-hindi",
+    "ca": "softcatala/wav2vec2-large-xlsr-catala",
+    "ml": "gvs/wav2vec2-large-xlsr-malayalam",
+    "no": "NbAiLab/nb-wav2vec2-1b-bokmaal",
+    "nn": "NbAiLab/nb-wav2vec2-300m-nynorsk",
 }
 
 
@@ -310,7 +314,8 @@ def align(
 
             sentence_text = text[sstart:send]
             sentence_start = curr_chars["start"].min()
-            sentence_end = curr_chars["end"].max()
+            end_chars = curr_chars[curr_chars["char"] != ' ']
+            sentence_end = end_chars["end"].max()
             sentence_words = []
 
             for word_idx in curr_chars["word-idx"].unique():
